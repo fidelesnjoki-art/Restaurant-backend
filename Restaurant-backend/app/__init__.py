@@ -19,4 +19,9 @@ def create_app():
     from .routes import bp
     app.register_blueprint(bp, url_prefix="/api")
 
+    with app.app_context():
+        db.create_all()
+        from seed import seed_db
+        seed_db()
+
     return app

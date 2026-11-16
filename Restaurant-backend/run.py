@@ -1,4 +1,6 @@
-from app import create_app
+from app import create_app, db
+from app.models import Category, MenuItem
+import os
 
 app = create_app()
 

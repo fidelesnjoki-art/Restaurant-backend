@@ -1,7 +1,5 @@
-from app import create_app, db
+from app import db
 from app.models import Category, MenuItem
-
-app = create_app()
 
 MENU_DATA = {
     "Entrées 前菜": [
@@ -51,9 +49,10 @@ IMAGES = {
     "Chrysanthemum Spritz": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600",
 }
 
-with app.app_context():
-    db.drop_all()
-    db.create_all()
+
+def seed_db():
+    if Category.query.first():
+        return  # already seeded, skip
     for cat_name, items in MENU_DATA.items():
         cat = Category(name=cat_name)
         db.session.add(cat)
